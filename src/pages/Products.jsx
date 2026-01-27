@@ -9,11 +9,13 @@ import { categorydata } from '../Api-data/CategoryApi'
 
 export default function About() {
     const { products, loading, setLoading, setProducts } = useProducts()
+    
     const category = categorydata
     const [page, setpage] = useState(1)
     const { slug } = useParams()
     const limit = 48;
     const skip = (page - 1) * limit
+    const isCategoryPage = Boolean(slug);
     // console.log("slug=", slug)
 
     async function fetchdata() {
@@ -103,10 +105,23 @@ export default function About() {
                         ))}
                     </div>
 
-                    <div className='max-w-[300px] mx-auto my-3 flex gap-3'>
-                        <button className='px-6 py-2 border' onClick={() => setpage(page - 1)}>Prev</button>
-                        <button className='px-6 py-2 border' onClick={() => setpage(page + 1)}>Next</button>
-                    </div>
+                    {!isCategoryPage && (
+                        <div className='max-w-[300px] mx-auto my-3 flex gap-3'>
+                            <button
+                                className='px-6 py-2 border'
+                                onClick={() => setpage(page - 1)}
+                            >
+                                Prev
+                            </button>
+                            <button
+                                className='px-6 py-2 border'
+                                onClick={() => setpage(page + 1)}
+                            >
+                                Next
+                            </button>
+                        </div>
+                    )}
+
                 </div>
 
             </div>
