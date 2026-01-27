@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
+import useProducts from "../hooks/useProducts";
+import Spinner from "../components/Spinner";
 
 const ProductDetail = () => {
     // ✅ STATIC DATA (same page)
@@ -13,13 +15,16 @@ const ProductDetail = () => {
     })
     const [product, setproduct] = useState({})
     const [related, setrelated] = useState([])
+    const {loading, setLoading} = useProducts()
 
     const { id } = useParams()
 
     async function getdatabyid(id) {
+        setLoading(true)
         let response = await fetch(`https://dummyjson.com/products/${id}`)
         let data = await (response.json())
         setproduct(data)
+        setLoading(false)
     }
     useEffect(() => {
         if (id) {
@@ -39,6 +44,7 @@ const ProductDetail = () => {
 
 
     // 👈 static product
+    if(loading) return <Spinner />
 
     return (
         <>
