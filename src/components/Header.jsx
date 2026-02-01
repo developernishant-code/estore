@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
     ShoppingCart,
     Search,
@@ -7,9 +7,11 @@ import {
     X,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Storecontext } from "../Context";
 
 const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
+    const {cart} = useContext(Storecontext)
     const navitems = [
         {
             name: "Home",
@@ -62,16 +64,19 @@ const Header = () => {
 
                 {/* Right Section */}
                 <div className="flex items-center gap-4">
-                    {/* Cart */}
-                    <div className="relative cursor-pointer">
-                        <ShoppingCart />
-                        <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-                            2
-                        </span>
-                    </div>
+                    <Link to={"/cart"}>
+                        {/* Cart */}
+                        <div className="relative cursor-pointer">
+                            <ShoppingCart />
+                            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                                {cart.length}
+                            </span>
+                        </div>
+                    </Link>
+
 
                     {/* Login (Desktop only) */}
-                    
+
 
                     {/* Hamburger */}
                     <button
@@ -106,7 +111,7 @@ const Header = () => {
                             })
                         }
 
-                       
+
                     </nav>
                 </div>
             )}
