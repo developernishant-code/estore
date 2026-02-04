@@ -23,7 +23,7 @@ const ProductCard = ({ product, id }) => {
                 ₹ {product.price}
             </p>
 
-            <button onClick={()=>addtoCart(id)} className="mt-3 w-full cursor-pointer bg-indigo-600 text-white py-2 rounded-lg text-sm rounded-lg">
+            <button onClick={()=>addtoCart(product)} className="mt-3 w-full cursor-pointer bg-indigo-600 text-white py-2 rounded-lg text-sm rounded-lg">
                 Add to Cart
             </button>
         </div>

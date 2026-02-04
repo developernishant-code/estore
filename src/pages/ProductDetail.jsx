@@ -4,10 +4,12 @@ import ProductCard from "../components/ProductCard";
 import useProducts from "../hooks/useProducts";
 import Spinner from "../components/Spinner";
 import { Storecontext } from "../Context";
+import ProductDetailSkeleton from "../Skeletons/DetailSkeleton";
 
 const ProductDetail = () => {
     // ✅ STATIC DATA (same page)
     const { pathname } = useLocation()
+    const {loading} = useProducts()
     useEffect(() => {
         window.scrollTo({
             top: 0,
@@ -16,17 +18,16 @@ const ProductDetail = () => {
     })
     const [product, setproduct] = useState({})
     const [related, setrelated] = useState([])
-    const {loading, setLoading} = useProducts()
     const {addtoCart} = useContext(Storecontext)
 
     const { id } = useParams()
 
     async function getdatabyid(id) {
-        setLoading(true)
+        
         let response = await fetch(`https://dummyjson.com/products/${id}`)
         let data = await (response.json())
         setproduct(data)
-        setLoading(false)
+       
     }
     useEffect(() => {
         if (id) {
@@ -43,10 +44,13 @@ const ProductDetail = () => {
             })
     }, [product.category, product.id])
 
+    
+
+
 
 
     // 👈 static product
-    if(loading) return <Spinner />
+    if(loading) return <ProductDetailSkeleton />
 
     return (
         <>
@@ -110,7 +114,7 @@ const ProductDetail = () => {
                             <p><strong>Return Policy:</strong> {product.returnPolicy}</p>
                         </div>
 
-                        <button onClick={()=>addtoCart(product.id)} className="mt-6 bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition">
+                        <button onClick={()=>addtoCart(product)} className="mt-6 bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition">
                             Add to Cart
                         </button>
                     </div>

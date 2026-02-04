@@ -5,6 +5,7 @@ import ProductCard from '../components/ProductCard'
 import Spinner from '../components/Spinner'
 import { useLocation } from 'react-router-dom'
 import { categorydata } from '../Api-data/CategoryApi'
+import ProductsPageSkeleton from '../Skeletons/ProductSkeleton'
 
 
 export default function About() {
@@ -50,7 +51,7 @@ export default function About() {
         }, [pathname])
     })
 
-    if (loading) return <Spinner />
+    if (loading) return <ProductsPageSkeleton/>
     return (
         <>
             <div className='max-w-[1700px] mx-auto grid grid-cols-1 lg:grid-cols-6 gap-4'>

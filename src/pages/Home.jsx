@@ -7,6 +7,7 @@ import useProducts from '../hooks/useProducts'
 import ProductCard from '../components/ProductCard'
 import Spinner from '../components/Spinner'
 import { Link } from 'react-router-dom'
+import HomeSkeleton from '../Skeletons/HomeSkeleton'
 
 export default function Home() {
     const laptopBrands = [
@@ -49,7 +50,7 @@ export default function Home() {
 
     const { products, loading } = useProducts();
 
-    if (loading) return <Spinner />
+    if (loading) return <HomeSkeleton />
 
 
     return (

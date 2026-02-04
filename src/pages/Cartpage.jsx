@@ -1,14 +1,18 @@
 import React, { useContext } from "react";
 import { Storecontext } from "../Context";
+import useProducts from "../hooks/useProducts";
+import CartSkeleton from "../Skeletons/CartPageSkeleton";
 
 const Cartpage = () => {
   const { cart, removeitem, qtyhandler } = useContext(Storecontext)
+  const {loading} = useProducts()
   const totalItems = cart.reduce((acc, item) => acc + item.qty, 0);
 
   const totalPrice = cart.reduce(
     (acc, item) => acc + item.price * item.qty,
     0
   );
+  if(loading) return <CartSkeleton />
   return (
     <div className="min-h-screen bg-gray-100 p-4 md:p-10">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">

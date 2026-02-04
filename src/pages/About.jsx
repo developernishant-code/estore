@@ -1,4 +1,9 @@
+import useProducts from "../hooks/useProducts";
+import AboutSkeleton from "../Skeletons/AboutpageSkeleton";
+
 const About = () => {
+  const {loading} = useProducts()
+  if(loading) return <AboutSkeleton />
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
       {/* Heading */}

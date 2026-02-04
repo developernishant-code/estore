@@ -7,8 +7,13 @@ import {
   Phone,
   MapPin,
 } from "lucide-react";
+import useProducts from "../hooks/useProducts";
+import FooterSkeleton from "../Skeletons/FooterSkeleton";
 
 const Footer = () => {
+  const {loading} = useProducts()
+
+  if(loading) return <FooterSkeleton />
   return (
     <footer className="bg-gray-900 text-gray-300 pt-12">
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">

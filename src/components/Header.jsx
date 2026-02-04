@@ -8,10 +8,13 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Storecontext } from "../Context";
+import HeaderSkeleton from "../Skeletons/HeaderSkeleton";
+import useProducts from "../hooks/useProducts";
 
 const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const {cart} = useContext(Storecontext)
+    const {loading} = useProducts()
     const navitems = [
         {
             name: "Home",
@@ -30,6 +33,8 @@ const Header = () => {
             path: "/contact"
         }
     ]
+
+    if(loading) return <HeaderSkeleton />
 
     return (
         <header className="w-full bg-white shadow-md sticky top-0 z-50">
